@@ -1,0 +1,100 @@
+<%- include('partials/header') -%>
+
+
+<h5>Filters</h5>
+
+<div class="filters">
+
+    <form action="/cityfilters" class="filter-form row g-3" method="post">
+        <div class="col-auto">
+            <input class=" me-2 form-control" type="number" placeholder="Minimum $" aria-label="Search" name="minPrice">
+        </div>
+        <div class="col-auto">
+            <input class="me-2 form-control" type="number" placeholder="Maximum $" aria-label="Search" name="maxPrice">
+        </div>
+        <div class="col-auto">
+            <input class="me-2 form-control" type="number" placeholder="Min # of Bedrooms" aria-label="Search" name="minNumberOfBedrooms">
+        </div>
+        <div class="col-auto">
+            <input class="me-2 form-control" type="number" placeholder="Max # of Bedrooms" aria-label="Search" name="maxNumberOfBedrooms">
+        </div>
+        <div class="col-auto">
+            <input class="me-2 form-control" type="number" placeholder="Min # of Bathrooms" aria-label="Search" name="minNumberOfBathrooms">
+        </div>
+        <div class="col-auto">
+            <input class="me-2 form-control" type="number" placeholder="Max # of Bathrooms" aria-label="Search" name="maxNumberOfBathrooms">
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary" type="submit">Apply Filters</button>
+        </div>
+        <div>
+            <input type="hidden" value="<%= cityName  %>" name="passedCity">
+            <input type="hidden" value="<%= stateName   %>" name="passedState">
+        </div>
+    
+           
+    </form>
+    
+</div>
+
+<div>
+    <h2 id="city" > <%= cityName   %> </h2>
+    <h3 id="state"> <%= stateName   %> </h3>
+</div>
+
+
+<section class="result-section">
+    
+    <div class="result-container">
+
+        
+     <% homesForSale1.forEach(function (homeForSale1) {  %> 
+
+
+
+         <div class="result">
+           <!-- Error handling to make sure there are images to be rendered, if not to render a "No image available picture" -->
+           <% if(typeof homeForSale1.primary_photo === "object" && homeForSale1.primary_photo!= null){  %> 
+            <div >
+                <img src=" <%= homeForSale1.primary_photo.href  %> " class="image-result" alt="...">
+              </div>
+            <% } else {  %> 
+                <div >
+                    <img src=" images/no-image.jpeg" class=" image-result" alt="...">
+                  </div>
+                <%  }  %> 
+           
+    <div class="result-fact-container">
+        <div class="house-facts">
+            <div>
+                <p> <%= homeForSale1.list_price.toLocaleString('en-US', { style: 'currency',currency: 'USD',minimumFractionDigits: 0, maximumFractionDigits: 0,})%> </p>
+            </div>
+
+            <div>
+                <p> <%= homeForSale1.description.beds %> BED |  <%= homeForSale1.description.baths %> BATH | <%= homeForSale1.description.sqft %> sqft </p>
+            </div>
+            <div>
+                <p><%= homeForSale1.location.address.line %> </p>
+            </div>
+            <div>
+                <p> <%= homeForSale1.list_date.slice(0,10) %> </p>
+            </div>
+            
+        </div>
+        <div>
+            <div class="fact-buttons">
+                <form action="/property" method="post">
+                    <input type="hidden" name="propertyId" value="<%= homeForSale1.property_id %> ">
+                    <button type="submit" class="btn btn-primary">View More</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+    <% }) %> 
+    </div>
+</section>
+
+<%- include('partials/footer') -%>

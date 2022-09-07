@@ -1,0 +1,93 @@
+<%- include('partials/header') -%>
+
+
+<section class="property-section">
+    <% if(!primaryPropertyPhoto ){  %> 
+        <div class='no-property-img'>
+            <img src=" images/no-image.jpeg"  alt="...">
+          </div>
+
+        <% } else {  %> 
+
+            <div class="property-carousel">
+                <div class="image-carousel property-carousel-container">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false">
+                        
+                        <div class="carousel-inner">
+            
+                            <div class="carousel-item active">
+                                <img src=" <%= primaryPropertyPhoto[0].href %> " class="d-block w-100" alt="...">
+                            </div>
+                            <% propertyPhotos.forEach(function(propertyPhoto){ %>
+                          <div class="carousel-item ">
+                            <img src=" <%= propertyPhoto.href  %> " class="d-block w-100" alt="...">
+                          </div>
+                          <% }) %> 
+        
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                </div>
+            </div>
+
+
+            <%  }  %> 
+
+    
+
+    <div >
+        <h2><%= propertyDetails.list_price.toLocaleString('en-US', { style: 'currency',currency: 'USD',minimumFractionDigits: 0, maximumFractionDigits: 0,})%> </h2>
+    </div>
+    <div class="property-location">
+        <p><%= propertyDetails.location.address.line %> </p>
+        <p><%= propertyDetails.location.address.state %> , <%= propertyDetails.location.address.state_code %> </p>
+    </div>
+    <div class="description">
+        <p><%= propertyDetails.description.beds %> Beds </p>
+        <p> <%= propertyDetails.description.baths %> Baths </p>
+        <p><%= propertyDetails.description.sqft %> Sqft </p>
+        <p><%= propertyDetails.description.sub_type %></p>
+        <p><%= propertyDetails.description.year_built %> Build </p>
+    </div>
+
+    <div class="property-text">
+        <h4>Property Description</h4>
+        <p><%= propertyDetails.description.text %></p>
+    </div>
+
+    <div class="property-features-container">
+        <h4>Property Features</h4>
+
+        <div class="property-features">
+
+                <% propertyTags.forEach(function(propertyTag){ %>
+                    <div>
+                        <p> <%= propertyTag .replace(/_/g, " ") %></p> 
+                    </div>
+
+                    <% }) %>
+        </div>
+ 
+
+    </div>
+
+
+
+    
+</section>
+
+
+
+
+
+
+
+
+<%- include('partials/footer') -%>
