@@ -37,7 +37,7 @@ app.post("/city", function(req,res){
           
         },
       headers: {
-        'X-RapidAPI-Key': '996ed940d7msh8951820136e8fb5p13b1abjsnb1a69858ab93',
+        'X-RapidAPI-Key': 'Insert X-RapidAPI-Key Here',
         'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com'
       }
     };
@@ -88,7 +88,7 @@ app.post("/cityfilters", function(req,res){
           baths_max: req.body.maxNumberOfBathrooms
         },
       headers: {
-        'X-RapidAPI-Key': '996ed940d7msh8951820136e8fb5p13b1abjsnb1a69858ab93',
+        'X-RapidAPI-Key': 'Insert X-RapidAPI-Key Here',
         'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com'
       }
     };
@@ -119,7 +119,7 @@ app.post("/property", function(req,res){
     url: 'https://us-real-estate.p.rapidapi.com/property-detail',
     params: {property_id: req.body.propertyId},
     headers: {
-      'X-RapidAPI-Key': '996ed940d7msh8951820136e8fb5p13b1abjsnb1a69858ab93',
+      'X-RapidAPI-Key': 'Insert X-RapidAPI-Key Here',
       'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com'
     }
   };
